@@ -19,6 +19,7 @@ object Functional {
     loop(0)
   }
 
+
   def findFirst[A](ss : Array[A], p: A => Boolean) : Int = {
     @annotation.tailrec
     def loop(n : Int) : Int = {
@@ -33,7 +34,7 @@ object Functional {
     (b : B) => f(a,b)
 
   def curry[A,B,C](f: (A,B) => C): A => (B => C) = {
-    (a : A) => partial1(a,f)
+    (a : A) => partial(a,f)
   }
   
   def uncurry[A,B,C](f: A => B => C) : (A, B) => C = {
@@ -42,6 +43,10 @@ object Functional {
 
   def compose[A,B,C](f : B => C, g : A => B ) : A => C = {
     (a : A) => f(g(a))
+  }
+
+  def main(args : Array[String]) : Unit  = {
+    println("test")
   }
 
 }
