@@ -80,11 +80,9 @@ object List1 {
     List1.foldLeft(list, Nil:List1[A])((h,t) => Cons(t,h))
   }
 
-
-
-
-
-  
+  def concat[A](list : List1[List1[A]] ) = {
+    List1.foldRight(list, Nil:List1[A])(append)
+  }
 
   def main(args : Array[String]) : Unit =
   {
