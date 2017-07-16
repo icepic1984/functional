@@ -49,14 +49,36 @@ object List1 {
 
   }
 
+  def length[A](list : List1[A]) : Int = {
+    foldRight(list,0)((_,y) => 1 + y)
+  }
+
   def foldRight[A,B](list : List1[A], z : B)(f : (A,B) => B) : B = list match{
     case Nil => z
     case Cons(x, xs) => f(x, foldRight(xs,z)(f))
   }
 
-  def length[A](list : List1[A]) : Int = {
-    foldRight(list,0)((x,y) => 1 + y)
+  @annotation.tailrec
+  def foldLeft[A,B](list : List1[A], z : B)(f: (B,A) => B) : B = list match {
+    case Nil => z
+    case Cons(x, xs) => foldLeft(xs,f(z,x))(f)
   }
+
+  def append2[A](list1 : List1[A], list2 : List1[A]) : List1[A] = {
+    List1.foldRight(list1, list2)(Cons(_,_))
+  }
+
+  def sum2(list : List1[Int]) : Int = {
+    List1.foldLeft(list,0)( _ + _)
+  }
+
+  def product2(list : List1[Double]) : Double = {
+    List1.foldLeft(list,1.0)(_ * _)
+  }
+
+
+
+  
 
   def main(args : Array[String]) : Unit =
   {
@@ -69,6 +91,7 @@ object List1 {
       case _ => 101
     }
     List1.dropWhile(List1(1,2,3,4,5), (x : Int) => x < 3)  
+    List1.foldRight(Cons(1,Cons(2,Cons(3,Nil))), Nil:List1[Int])(Cons(_,_))
 
 
   } 
