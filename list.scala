@@ -84,6 +84,14 @@ object List1 {
     List1.foldRight(list, Nil:List1[A])(append)
   }
 
+  def transform(list : List1[Int]) : List1[Int] = {
+    List1.foldRight(list,Nil:List1[Int])((h,t) => Cons(1+h,t))
+  }
+
+  def map[A,B](list : List1[A])(f : A => B) : List1[B] = {
+    List1.foldRight(list, Nil:List1[B])((h,t) => Cons(f(h),t))
+  }
+
   def main(args : Array[String]) : Unit =
   {
     List1(10, 20)
@@ -96,6 +104,8 @@ object List1 {
     }
     List1.dropWhile(List1(1,2,3,4,5), (x : Int) => x < 3)  
     List1.foldRight(Cons(1,Cons(2,Cons(3,Nil))), Nil:List1[Int])(Cons(_,_))
+
+    List1.concat(List1(List1(10,20),List1(30,40),List1(50,60)))
 
 
   } 
