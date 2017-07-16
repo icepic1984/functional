@@ -36,6 +36,13 @@ object List1 {
       case _ => list
   }
 
+  def append[A](list1 : List1[A], list2 : List1[A]) : List1[A] = 
+    list1 match {
+      case Nil => list2
+      case Cons(h,t) => Cons(h, append(t, list2))
+  }
+
+
   def main(args : Array[String]) : Unit =
   {
     List1(10, 20)
