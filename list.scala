@@ -76,6 +76,12 @@ object List1 {
     List1.foldLeft(list,1.0)(_ * _)
   }
 
+  def reverse[A](list : List1[A]) : List1[A] = {
+    List1.foldLeft(list, Nil:List1[A])((h,t) => Cons(t,h))
+  }
+
+
+
 
 
   
