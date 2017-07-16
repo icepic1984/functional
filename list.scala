@@ -54,6 +54,9 @@ object List1 {
     case Cons(x, xs) => f(x, foldRight(xs,z)(f))
   }
 
+  def length[A](list : List1[A]) : Int = {
+    foldRight(list,0)((x,y) => 1 + y)
+  }
 
   def main(args : Array[String]) : Unit =
   {
