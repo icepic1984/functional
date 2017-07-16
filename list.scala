@@ -42,6 +42,18 @@ object List1 {
       case Cons(h,t) => Cons(h, append(t, list2))
   }
 
+  def init[A](list : List1[A]) : List1[A] = list match{
+    case Cons(_, Nil) => Nil
+    case Cons(x, xs) => Cons(x, init(xs))
+    case Nil => Nil
+
+  }
+
+  def foldRight[A,B](list : List1[A], z : B)(f : (A,B) => B) : B = list match{
+    case Nil => z
+    case Cons(x, xs) => f(x, foldRight(xs,z)(f))
+  }
+
 
   def main(args : Array[String]) : Unit =
   {
