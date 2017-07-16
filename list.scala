@@ -29,9 +29,12 @@ object List1 {
       case Cons(_, xs) => drop(xs, n-1)
       case Nil => Nil
     }
-
   }
 
+  def dropWhile[A](list : List1[A], f: A => Boolean) : List1[A] = list match{
+      case Cons(x, xs) if f(x) => dropWhile(xs,f) 
+      case _ => list
+  }
 
   def main(args : Array[String]) : Unit =
   {
@@ -43,7 +46,9 @@ object List1 {
       case Cons(h, t) =>  h + sum(t)
       case _ => 101
     }
-    println(x)
+    List1.dropWhile(List1(1,2,3,4,5), (x : Int) => x < 3)  
+
+
   } 
 
 }
