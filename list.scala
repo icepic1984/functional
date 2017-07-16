@@ -14,6 +14,22 @@ object List1 {
 
   def tail[A]( a : List1[A]) :  List1[A] = a match {
     case Cons(_, xs) => xs
+    case Nil => sys.error("tail of empty list")
+  }
+
+  def setHead[A]( a : List1[A], x : A) : List1[A] = a match {
+    case Cons(_, xs) => Cons(x,xs)
+    case Nil => sys.error("setHead of empty list")
+  }
+
+  def drop[A](list : List1[A], n : Int) : List1[A] = {
+    if( n <= 0)
+      list
+    else list match {
+      case Cons(_, xs) => drop(xs, n-1)
+      case Nil => Nil
+    }
+
   }
 
 
